@@ -53,7 +53,7 @@ main{
     background-color: var(--red);
 }
 .bomb-appear{
-    width: 50px;
+    width: 40px;
 }
 .click-none {
     pointer-events: none;
@@ -78,3 +78,7 @@ main{
     transition: 600ms;
 }
 .js-btn:hover{ transform: scale(1.1);}
+.credits {
+    padding-left: 15px;
+    font-size: 10px;
+}

@@ -128,8 +128,8 @@ function endGame(){
     for(let i = 0; i < squares.length; i++){
         if(bombsArray.includes(i+1)){
             squares[i].classList.add('bomb');
-            // img bomb che non trovo con sfondo trasparente....
-            squares[i].innerHTML = '<img src="./img/bombbomb.png" alt="" class="bomb-appear"></img>'  
+            // img bomb con crediti
+            squares[i].innerHTML = '<img src="./img/bomba.png" alt="" class="bomb-appear"></img>'; 
         }
         // eliminaz click sui quadrati
         squares[i].classList.add('click-none');
