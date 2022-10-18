@@ -64,22 +64,25 @@ btnPlay.addEventListener('click', function(){
             square.innerHTML = `
             <span>${num}</span>
             `;
-            square.addEventListener('click', function(){
-                    if(bombsArray.includes(num)){
-                        endGame()
-                        const squares = document.querySelectorAll('.square');
-                        for(let i = 0; i < squares.length; i++){
-                            if(bombsArray.includes(i+1)){
-                                squares[i].classList.add('bomb');
-                            }
+            // splittato clickonsquare e addeventlsitener per poter mettere removeEventListener
+            function clickOnSquare(){
+                if(bombsArray.includes(num)){
+                    endGame()
+                    const squares = document.querySelectorAll('.square');
+                    for(let i = 0; i < squares.length; i++){
+                        if(bombsArray.includes(i+1)){
+                            squares[i].classList.add('bomb');
                         }
-                    } else {
-                        score++;
-                        square.classList.add('safe');
-                        endGame()
-                        console.log(score)
                     }
-            })
+                } else {
+                    score++;
+                    square.classList.add('safe');
+                    endGame();
+                    console.log(score);
+                    square.removeEventListener('click', clickOnSquare);
+                }
+            }
+            square.addEventListener('click', clickOnSquare)
             return square;
     } 
 
