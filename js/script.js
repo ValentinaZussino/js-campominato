@@ -66,7 +66,7 @@ function createSquare(num){
         square.style.width = `calc(100% / ${square4Side})`;
         square.style.height = `calc(100% / ${square4Side})`;
         square.innerHTML = `
-        <span>${num}</span>
+        <span class='num-square'>${num}</span>
         `;
         // splittato clickonsquare e addeventlsitener per poter mettere removeEventListener
         function clickOnSquare(){

@@ -45,6 +45,7 @@ main{
     justify-content: center;
     cursor: pointer;
 }
+.num-square { visibility: hidden;}
 .safe {
     background-color: var(--green);
 }
