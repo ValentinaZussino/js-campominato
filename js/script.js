@@ -105,6 +105,7 @@ btnPlay.addEventListener('click', function(){
             if(bombsArray.includes(i+1)){
                 squares[i].classList.add('bomb');
             }
-        }
+            squares[i].classList.add('click-none');
+        } 
     }
 })
