@@ -19,6 +19,8 @@ const btnPlay = document.getElementById('play');
 
 // on click
 btnPlay.addEventListener('click', function(){
+    // prendo main
+    const main = document.querySelector('main');
     // prendo container grid e lo pulisco
     const gridContainer = document.getElementById('grid-container');
     gridContainer.innerHTML = '';
@@ -53,6 +55,8 @@ btnPlay.addEventListener('click', function(){
     // creo var per il num massimo di tentativi dell'utente e var per punteggio
     const numAttempts = numSquares - numBombs;
     let score = 0; // lo devo aumentare solo nel caso in cui la mia casella sia safe
+    // creo un div per hai perso/hai vinto
+    const looseOrWin = document.createElement('div');
 
     // provato prima per tre ore con do while (per creaz quadrati e grigli insieme) ma nada de nada de nada......
     //funzione per generare quadrato
@@ -69,7 +73,13 @@ btnPlay.addEventListener('click', function(){
             function clickOnSquare(){
                 if(bombsArray.includes(num)){
                     endGame();
-                    console.log('hai perso');
+                    looseOrWin.innerHTML = `
+                    <span>GAME OVER</span>
+                    <br>
+                    <button>Try Again</button>
+                    `
+                    looseOrWin.classList.add('loose');
+                    main.prepend(looseOrWin);
                 } else {
                     score++;
                     console.log(score);
@@ -77,7 +87,13 @@ btnPlay.addEventListener('click', function(){
                     square.removeEventListener('click', clickOnSquare);
                     if(score === numAttempts){
                         endGame();
-                        console.log('hai vinto');
+                        looseOrWin.innerHTML = `
+                        <span>YOU WIN!!!</span>
+                        <br>
+                        <button>Play Again</button>
+                        `
+                        looseOrWin.classList.add('win');
+                        main.prepend(looseOrWin);
                     }
                 }
             }

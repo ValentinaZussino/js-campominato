@@ -56,3 +56,17 @@ main{
 .click-none {
     pointer-events: none;
 }
+.loose {
+    padding-bottom: 30px;
+    color: var(--red);
+    font-weight: bold;
+    font-size: 25px;
+    text-align: center;
+}
+.win {
+    padding-bottom: 30px;
+    color: var(--green);
+    font-weight: bold;
+    font-size: 25px;
+    text-align: center;
+}
