@@ -3,6 +3,8 @@
     --deepblue: rgb(0, 2, 34);
     --green: green;
     --red: rgb(199, 2, 2);
+    --lightgray: rgb(205, 205, 205);
+    --gray: rgb(126, 126, 126);
 }
 body{
     background-color: var(--deepblue);
@@ -36,8 +38,10 @@ main{
     align-content: flex-start;
 }
 .square {
-    border: 2px solid rgb(92, 92, 92);
-    background-color: rgb(175, 175, 175);
+    border-radius: 12px;
+    outline: inset;
+    background-color: var(--lightgray);
+    box-shadow: 10px 10px 5px var(--gray);
     display: flex;
     align-items: center;
     justify-content: center;
