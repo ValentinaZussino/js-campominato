@@ -67,19 +67,16 @@ btnPlay.addEventListener('click', function(){
             // splittato clickonsquare e addeventlsitener per poter mettere removeEventListener
             function clickOnSquare(){
                 if(bombsArray.includes(num)){
-                    endGame()
-                    const squares = document.querySelectorAll('.square');
-                    for(let i = 0; i < squares.length; i++){
-                        if(bombsArray.includes(i+1)){
-                            squares[i].classList.add('bomb');
-                        }
-                    }
-                } else {
-                    score++;
-                    square.classList.add('safe');
                     endGame();
-                    console.log(score);
-                    square.removeEventListener('click', clickOnSquare);
+                } else {
+                    if(score < numAttempts){
+                        score++;
+                        console.log(score);
+                        square.classList.add('safe');
+                        square.removeEventListener('click', clickOnSquare);
+                    } else {
+                        endGame();
+                    }
                 }
             }
             square.addEventListener('click', clickOnSquare)
@@ -102,6 +99,11 @@ btnPlay.addEventListener('click', function(){
 
     //creo funzione end game che poi sarà richiamata in square.addEventListener
     function endGame(){
-        console.log('game over')
-    };
+        const squares = document.querySelectorAll('.square');
+        for(let i = 0; i < squares.length; i++){
+            if(bombsArray.includes(i+1)){
+                squares[i].classList.add('bomb');
+            }
+        }
+    }
 })
