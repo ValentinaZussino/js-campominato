@@ -49,6 +49,10 @@ btnPlay.addEventListener('click', function(){
         }
     }
     console.log(bombsArray);
+    // creo var per il num massimo di tentativi dell'utente e var per punteggio
+    const numAttempts = numSquares - numBombs;
+    let score = 0; // lo devo aumentare solo nel caso che la mia casella sia safe
+
     // provato prima per tre ore con do while (per creaz quadrati e grigli insieme) ma nada de nada de nada......
     //funzione per generare quadrato
     function createSquare(num){
@@ -62,6 +66,7 @@ btnPlay.addEventListener('click', function(){
             `;
             square.addEventListener('click', function(){
                     if(bombsArray.includes(num)){
+                        endGame()
                         const squares = document.querySelectorAll('.square');
                         for(let i = 0; i < squares.length; i++){
                             if(bombsArray.includes(i+1)){
@@ -69,7 +74,10 @@ btnPlay.addEventListener('click', function(){
                             }
                         }
                     } else {
+                        score++;
                         square.classList.add('safe');
+                        endGame()
+                        console.log(score)
                     }
             })
             return square;
@@ -88,4 +96,9 @@ btnPlay.addEventListener('click', function(){
     
     // chiamo funzione griglia
     createGrid();
+
+    //creo funzione end game che poi sarà richiamata in square.addEventListener
+    function endGame(){
+        console.log('game over')
+    };
 })
