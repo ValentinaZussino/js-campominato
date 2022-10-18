@@ -1,0 +1,46 @@
+:root {
+    --white: white;
+}
+body{
+    background-color: rgb(98, 106, 254);
+    font-family: 'Roboto', sans-serif;
+}
+.main-wrapper {
+    height: 100vh;
+}
+header, footer {
+    width: 100%;
+    background-color: var(--white);
+    padding: 0 20px;
+}
+header{
+    height: 80px;
+}
+main{
+    height: calc(100vh - 130px);
+    overflow-y: auto;
+}
+.container-grid {
+    height: 500px;
+    width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+.square {
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.safe {
+    background-color: rgb(0, 255, 115);
+}
+.bomb {
+    background-color: red;
+}
+footer{
+    height: 50px;
+    line-height: 50px;
+}
