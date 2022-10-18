@@ -17,112 +17,122 @@
 // prendo btn play
 const btnPlay = document.getElementById('play');
 
-// on click
-btnPlay.addEventListener('click', function(){
-    
-    // prendo container grid e lo pulisco
-    const gridContainer = document.getElementById('grid-container');
-    gridContainer.innerHTML = '';
-    
-    // creo variabile per numero quadrati --> dipende dal livello selezionato quindi faccio subito
-    const levelSelect = document.getElementById('level');
-    const level = levelSelect.value;
-    let numSquares = (level === 'easy') ? 100 : (level === 'hard') ? 81 : 49;
-    // switch(level){
-    //     case 'easy':
-    //         default: numSquares = 100;
-    //         break;
-    //     case 'hard':
-    //         numSquares = 81;
-    //         break;
-    //     case 'crazy': 
-    //         numSquares = 49;
-    //         break;
-    // }
-    console.log(level);
-    console.log(numSquares);
-    // creo var per numero bombe e array vuoto che riempio
-    const numBombs = 16;
-    const bombsArray = [];
-    while(bombsArray.length < numBombs){
-        let bombPosition = randomNumber(1, numSquares);
-        if(!bombsArray.includes(bombPosition)){
-            bombsArray.push(bombPosition);
-        }
-    }
-    console.log(bombsArray);
-    // creo var per il num massimo di tentativi dell'utente e var per punteggio
-    const numAttempts = numSquares - numBombs;
-    let score = 0; // lo devo aumentare solo nel caso in cui la mia casella sia safe
-    // creo un div per hai perso/hai vinto
-    const looseOrWin = document.createElement('div');
+// funzione play
+function play(){
 
-    // provato prima per tre ore con do while (per creaz quadrati e grigli insieme) ma nada de nada de nada......
-    //funzione per generare quadrato
-    function createSquare(num){
-            const square = document.createElement('div');
-            square.classList.add('square');
-            const square4Side = Math.sqrt(numSquares);
-            square.style.width = `calc(100% / ${square4Side})`;
-            square.style.height = `calc(100% / ${square4Side})`;
-            square.innerHTML = `
-            <span>${num}</span>
-            `;
-            // splittato clickonsquare e addeventlsitener per poter mettere removeEventListener
-            function clickOnSquare(){
-                if(bombsArray.includes(num)){
+// prendo container grid e lo pulisco
+const gridContainer = document.getElementById('grid-container');
+gridContainer.innerHTML = '';
+
+// creo variabile per numero quadrati --> dipende dal livello selezionato quindi faccio subito
+const levelSelect = document.getElementById('level');
+const level = levelSelect.value;
+let numSquares = (level === 'easy') ? 100 : (level === 'hard') ? 81 : 49;
+// switch(level){
+//     case 'easy':
+//         default: numSquares = 100;
+//         break;
+//     case 'hard':
+//         numSquares = 81;
+//         break;
+//     case 'crazy': 
+//         numSquares = 49;
+//         break;
+// }
+console.log(level);
+console.log(numSquares);
+// creo var per numero bombe e array vuoto che riempio
+const numBombs = 16;
+const bombsArray = [];
+while(bombsArray.length < numBombs){
+    let bombPosition = randomNumber(1, numSquares);
+    if(!bombsArray.includes(bombPosition)){
+        bombsArray.push(bombPosition);
+    }
+}
+console.log(bombsArray);
+// creo var per il num massimo di tentativi dell'utente e var per punteggio
+const numAttempts = numSquares - numBombs;
+let score = 0; // lo devo aumentare solo nel caso in cui la mia casella sia safe
+// creo un div per hai perso/hai vinto
+const looseOrWin = document.createElement('div');
+
+// provato prima per tre ore con do while (per creaz quadrati e grigli insieme) ma nada de nada de nada......
+//funzione per generare quadrato
+function createSquare(num){
+        const square = document.createElement('div');
+        square.classList.add('square');
+        const square4Side = Math.sqrt(numSquares);
+        square.style.width = `calc(100% / ${square4Side})`;
+        square.style.height = `calc(100% / ${square4Side})`;
+        square.innerHTML = `
+        <span>${num}</span>
+        `;
+        // splittato clickonsquare e addeventlsitener per poter mettere removeEventListener
+        function clickOnSquare(){
+            if(bombsArray.includes(num)){
+                endGame();
+                // loose or win
+                looseOrWin.innerHTML = `
+                <span>GAME OVER...</span>
+                <br>
+                <button class='js-btn refresh'>Try Again</button>
+                `
+                looseOrWin.classList.add('loose');
+                gridContainer.prepend(looseOrWin);
+                // refersh
+                const refresh = document.querySelector('.refresh');
+                refresh.addEventListener('click', play);
+            } else {
+                score++;
+                console.log(score);
+                square.classList.add('safe');
+                square.removeEventListener('click', clickOnSquare);
+                if(score === numAttempts){
                     endGame();
+                    // loose or win
                     looseOrWin.innerHTML = `
-                    <span>GAME OVER...</span>
+                    <span>YOU WIN!!!</span>
                     <br>
-                    <button class='js-btn refresh'>Try Again</button>
+                    <button class='js-btn refresh'>Play Again</button>
                     `
-                    looseOrWin.classList.add('loose');
+                    looseOrWin.classList.add('win');
                     gridContainer.prepend(looseOrWin);
-                } else {
-                    score++;
-                    console.log(score);
-                    square.classList.add('safe');
-                    square.removeEventListener('click', clickOnSquare);
-                    if(score === numAttempts){
-                        endGame();
-                        looseOrWin.innerHTML = `
-                        <span>YOU WIN!!!</span>
-                        <br>
-                        <button class='js-btn refresh'>Play Again</button>
-                        `
-                        looseOrWin.classList.add('win');
-                        gridContainer.prepend(looseOrWin);
-                    }
+                    // refersh
+                    const refresh = document.querySelector('.refresh');
+                    refresh.addEventListener('click', play);
                 }
             }
-            square.addEventListener('click', clickOnSquare)
-            return square;
-    } 
-
-    //funzione per generare griglia
-    function createGrid(){
-        const grid = document.createElement('div');
-        grid.classList.add('container-grid');
-        for(let i = 1; i <= numSquares; i++){
-            const square = createSquare(i);
-            grid.appendChild(square);
         }
-        gridContainer.appendChild(grid);
-    }
-    
-    // chiamo funzione griglia
-    createGrid();
+        square.addEventListener('click', clickOnSquare)
+        return square;
+} 
 
-    //creo funzione end game che poi sarà richiamata in clickOnSquare
-    function endGame(){
-        const squares = document.querySelectorAll('.square');
-        for(let i = 0; i < squares.length; i++){
-            if(bombsArray.includes(i+1)){
-                squares[i].classList.add('bomb');
-            }
-            // eliminaz click sui quadrati
-            squares[i].classList.add('click-none');
-        } 
+//funzione per generare griglia
+function createGrid(){
+    const grid = document.createElement('div');
+    grid.classList.add('container-grid');
+    for(let i = 1; i <= numSquares; i++){
+        const square = createSquare(i);
+        grid.appendChild(square);
     }
-})
+    gridContainer.appendChild(grid);
+}
+
+// chiamo funzione griglia
+createGrid();
+
+//creo funzione end game che poi sarà richiamata in clickOnSquare
+function endGame(){
+    const squares = document.querySelectorAll('.square');
+    for(let i = 0; i < squares.length; i++){
+        if(bombsArray.includes(i+1)){
+            squares[i].classList.add('bomb');
+        }
+        // eliminaz click sui quadrati
+        squares[i].classList.add('click-none');
+    } 
+}
+}
+// on click
+btnPlay.addEventListener('click', play);
