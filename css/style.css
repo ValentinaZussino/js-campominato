@@ -52,6 +52,9 @@ main{
 .bomb {
     background-color: var(--red);
 }
+.bomb-appear{
+    width: 50px;
+}
 .click-none {
     pointer-events: none;
 }
