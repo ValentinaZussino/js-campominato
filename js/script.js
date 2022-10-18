@@ -68,14 +68,15 @@ btnPlay.addEventListener('click', function(){
             function clickOnSquare(){
                 if(bombsArray.includes(num)){
                     endGame();
+                    console.log('hai perso');
                 } else {
-                    if(score < numAttempts){
-                        score++;
-                        console.log(score);
-                        square.classList.add('safe');
-                        square.removeEventListener('click', clickOnSquare);
-                    } else {
+                    score++;
+                    console.log(score);
+                    square.classList.add('safe');
+                    square.removeEventListener('click', clickOnSquare);
+                    if(score === numAttempts){
                         endGame();
+                        console.log('hai vinto');
                     }
                 }
             }
