@@ -19,13 +19,12 @@ const btnPlay = document.getElementById('play');
 
 // on click
 btnPlay.addEventListener('click', function(){
-    // prendo main
-    const main = document.querySelector('main');
+    
     // prendo container grid e lo pulisco
     const gridContainer = document.getElementById('grid-container');
     gridContainer.innerHTML = '';
-    // creo variabile per numero quadrati --> dipende dal livello selezionato quindi faccio subito
     
+    // creo variabile per numero quadrati --> dipende dal livello selezionato quindi faccio subito
     const levelSelect = document.getElementById('level');
     const level = levelSelect.value;
     let numSquares = (level === 'easy') ? 100 : (level === 'hard') ? 81 : 49;
@@ -74,12 +73,12 @@ btnPlay.addEventListener('click', function(){
                 if(bombsArray.includes(num)){
                     endGame();
                     looseOrWin.innerHTML = `
-                    <span>GAME OVER</span>
+                    <span>GAME OVER...</span>
                     <br>
-                    <button>Try Again</button>
+                    <button class='js-btn refresh'>Try Again</button>
                     `
                     looseOrWin.classList.add('loose');
-                    main.prepend(looseOrWin);
+                    gridContainer.prepend(looseOrWin);
                 } else {
                     score++;
                     console.log(score);
@@ -90,10 +89,10 @@ btnPlay.addEventListener('click', function(){
                         looseOrWin.innerHTML = `
                         <span>YOU WIN!!!</span>
                         <br>
-                        <button>Play Again</button>
+                        <button class='js-btn refresh'>Play Again</button>
                         `
                         looseOrWin.classList.add('win');
-                        main.prepend(looseOrWin);
+                        gridContainer.prepend(looseOrWin);
                     }
                 }
             }

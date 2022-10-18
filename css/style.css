@@ -1,26 +1,24 @@
 :root {
     --white: white;
     --deepblue: rgb(0, 2, 34);
-    --green: green;
-    --red: rgb(199, 2, 2);
+    --green: rgba(0, 195, 0, 0.6);
+    --red: rgba(254, 0, 0, 0.60);
     --lightgray: rgb(205, 205, 205);
     --gray: rgb(126, 126, 126);
+    --red2: rgba(254, 0, 0);
+    --green2: rgba(0, 195, 0);
 }
 body{
     background-color: var(--deepblue);
     font-family: 'Roboto', sans-serif;
 }
-.main-wrapper {
-    height: 100vh;
-}
+.main-wrapper {height: 100vh;}
 header, footer {
     width: 100%;
     background-color: var(--white);
     padding: 0 20px;
 }
-header{
-    height: 80px;
-}
+header{height: 80px;}
 footer{
     height: 50px;
     line-height: 50px;
@@ -56,17 +54,23 @@ main{
 .click-none {
     pointer-events: none;
 }
-.loose {
-    padding-bottom: 30px;
-    color: var(--red);
+.loose, .win {
+    padding-bottom: 50px;
     font-weight: bold;
     font-size: 25px;
     text-align: center;
+    letter-spacing: 2px;
 }
-.win {
-    padding-bottom: 30px;
-    color: var(--green);
-    font-weight: bold;
-    font-size: 25px;
-    text-align: center;
+.loose {color: var(--red2);}
+.win {color: var(--green2);}
+.js-btn {
+    border-radius: 8px;
+    border-color: var(--white);
+    background-color: transparent;
+    color: var(--white);
+    font-size: 15px;
+    padding: 5px 15px;
+    margin-top: 8px;
+    transition: 600ms;
 }
+.js-btn:hover{ transform: scale(1.1);}
