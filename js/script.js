@@ -23,20 +23,21 @@ btnPlay.addEventListener('click', function(){
     const gridContainer = document.getElementById('grid-container');
     gridContainer.innerHTML = '';
     // creo variabile per numero quadrati --> dipende dal livello selezionato quindi faccio subito
-    let numSquares;
+    
     const levelSelect = document.getElementById('level');
     const level = levelSelect.value;
-    switch(level){
-        case 'easy':
-            default: numSquares = 100;
-            break;
-        case 'hard':
-            numSquares = 81;
-            break;
-        case 'crazy': 
-            numSquares = 49;
-            break;
-    }
+    let numSquares = (level === 'easy') ? 100 : (level === 'hard') ? 81 : 49;
+    // switch(level){
+    //     case 'easy':
+    //         default: numSquares = 100;
+    //         break;
+    //     case 'hard':
+    //         numSquares = 81;
+    //         break;
+    //     case 'crazy': 
+    //         numSquares = 49;
+    //         break;
+    // }
     console.log(level);
     console.log(numSquares);
     // creo var per numero bombe e array vuoto che riempio
